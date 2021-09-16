@@ -59,6 +59,7 @@ DispatchQueue.main.async
           (4) utility : 수 초 ~ 수 분에 걸쳐 걸리는 작업 (비교적 무거운 작업들 - 파일 불러오기, 전송 등등)
           (5) background : 사용자에게 당장 인식시킬 필요가 없는 작업 ( 다음날 아침의 뉴스 불러오기, 백그라운드 업데이트 등 )
 ~~~Swift
+// Global Queue
 DispatchQueue.global(qos: .background).async
 ~~~
       
@@ -66,6 +67,7 @@ DispatchQueue.global(qos: .background).async
         - 용도에 따라 Qos, attributes 직업 설정 가능
          
 ~~~Swift
+//Costom Queue
 let concurrentQueue = DispatchQueue(label: "concurrent", qos: .background, attributes: .concurrnt
 let serialQueue = DispatchQueue(label: "serial", qos: .background)
 ~~~
