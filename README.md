@@ -46,9 +46,9 @@ GCD는 애플리케이션이 블록 객체 형태로 작업을 제출할 수 있
 
 ### Dispatch Queue 종류
 #### 1. Main Queue : 메인 쓰레드에서 작동하는 대기열. UI, 사용자 인터페이스등 화면 관련)
-      ~~~
-      DispatchQueue.main.async
-      ~~~
+~~~Swift
+DispatchQueue.main.async
+~~~
 
 #### 2. Global Queue : managed by system. 
         - QoS(Quality of Service) class에 의해 시스템에서 수행될 작업(task)의 우선순위를 정하는 concurrent Queue
@@ -58,13 +58,14 @@ GCD는 애플리케이션이 블록 객체 형태로 작업을 제출할 수 있
           (3) defalut
           (4) utility : 수 초 ~ 수 분에 걸쳐 걸리는 작업 (비교적 무거운 작업들 - 파일 불러오기, 전송 등등)
           (5) background : 사용자에게 당장 인식시킬 필요가 없는 작업 ( 다음날 아침의 뉴스 불러오기, 백그라운드 업데이트 등 )
-      ~~~
-      DispatchQueue.global(qos : .background).async
-      ~~~
+~~~Swift
+DispatchQueue.global(qos: .background).async
+~~~
       
 #### 3. Custom Queue : 필요에 의해 사용자가 직접 생성하고 사용하는 대기열 종류
         - 용도에 따라 Qos, attributes 직업 설정 가능
-          ~~~
-          let concurrentQueue = DispatchQueue(label: "concurrent", qos : .background, attributes : .concurrnt
-          let serialQueue = DispatchQueue(label: "serial", qos: .background)
-          ~~~
+         
+~~~Swift
+let concurrentQueue = DispatchQueue(label: "concurrent", qos : .background, attributes : .concurrnt
+let serialQueue = DispatchQueue(label: "serial", qos: .background)
+~~~
