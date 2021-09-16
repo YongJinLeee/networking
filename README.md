@@ -19,7 +19,7 @@ HTTP Request를 통해 정보를 요청(POST)
 by URL(Uniform Resource Locator)
 
 ### Request 구성
-
+두가지로 구성됨
 #### Header - 상태코드(응답이 제대로 들어왔는가에 대한 내용) 콘텐츠 타입이 전송됨
 ##### 콘텐츠 타입
 - text/html
