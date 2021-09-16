@@ -66,6 +66,6 @@ DispatchQueue.global(qos: .background).async
         - 용도에 따라 Qos, attributes 직업 설정 가능
          
 ~~~Swift
-let concurrentQueue = DispatchQueue(label: "concurrent", qos : .background, attributes : .concurrnt
+let concurrentQueue = DispatchQueue(label: "concurrent", qos: .background, attributes: .concurrnt
 let serialQueue = DispatchQueue(label: "serial", qos: .background)
 ~~~
