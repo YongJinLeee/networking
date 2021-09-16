@@ -36,7 +36,9 @@ by URL(Uniform Resource Locator)
 ## GCD
 
 ~~~
-GCD provides and manages FIFO queue to which your application can submit task in the form of a block objects. Work submitted to dispatch queues are executive on a pool of threads fully managed by the system. No guarantee is made as to the thread on which a task executes.
+GCD provides and manages FIFO queue to which your application can submit task in the form of a block objects. 
+Work submitted to dispatch queues are executive on a pool of threads fully managed by the system. 
+No guarantee is made as to the thread on which a task executes.
 ~~~
 
 GCD는 애플리케이션이 블록 객체 형태로 작업을 제출할 수 있는 FIFO 대기열을 제공하고 관리해주는 모듈. 
