@@ -30,4 +30,17 @@ relativeURL?.path
 relativeURL?.query
 relativeURL?.baseURL
 
+// URLComponents - 쿼리에 인코딩 필요한 경우, 개발시 좀 더 편리한 방법..
 
+var urlcomponents = URLComponents(string: "https://itunes.apple.com/search?")
+let mediaQuery = URLQueryItem(name: "media", value: "music")
+let entityQuery = URLQueryItem(name: "entity", value: "song")
+let termQuery = URLQueryItem(name: "term", value: "Gdragon")
+
+urlcomponents?.queryItems?.append(mediaQuery)
+urlcomponents?.queryItems?.append(entityQuery)
+urlcomponents?.queryItems?.append(termQuery)
+
+urlcomponents?.url?.scheme
+urlcomponents?.string
+urlcomponents?.queryItems?.last?.value
