@@ -61,7 +61,7 @@ DispatchQueue.global(qos: .background).async {
 }
 
 // sync, Async
-DispatchQueue.global(qos: .background).async {
+DispatchQueue.global(qos: .background).sync {
     for i in 0...5 {
         print ("😂 웃픔")
     }
