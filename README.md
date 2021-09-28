@@ -97,4 +97,66 @@ DispatchQueue.global(qos: .background).async {
 
 -----------
 
-Swift - RESTful API
+### sync, Async
+
+> Async
+
+~~~Swift
+DispatchQueue.global(qos: .background).async {
+    for i in 0...5 {
+        print ("😂 웃픔")
+    }
+}
+
+DispatchQueue.global(qos: .userInteractive).async {
+    for i in 0...5 {
+        print("🐈 고앵")
+    }
+}
+~~~
+
+실행 결과 : 
+
+<img width="158" alt="스크린샷 2021-09-29 02 36 25" src="https://user-images.githubusercontent.com/40759743/135137474-7f2c8120-d021-4ae7-be75-4cc26f4edd40.png">
+
+QoS가 userInteractive인 '고앵' 이 대체적으로 먼저 실행됨을 확인
+
+
+> sync
+
+~~~Swift
+DispatchQueue.global(qos: .background).sync {
+    for i in 0...5 {
+        print ("😂 웃픔")
+    }
+}
+
+DispatchQueue.global(qos: .userInteractive).async {
+    for i in 0...5 {
+        print("🐈 고앵")
+    }
+}
+~~~
+
+실행 결과 :
+
+<img width="138" alt="스크린샷 2021-09-29 02 38 40" src="https://user-images.githubusercontent.com/40759743/135137775-8476cdb5-a02d-455f-b7c8-3a70106f9a9c.png">
+
+sync 인 "웃픔"이 전부 실행되고 나서 "고앵" 이 실행됨
+
+-----------
+
+## URLSession 
+
+- URLSessionConfiguration Class 사용-> URLSession 생성 -> URLSessionTask 로 제어 (URL 진행상태를 Delegate 를 통해 확인할 수 있음)
+
+### URLSessionConfiguration Class
+
+Networking
+1. Default 
+2. Ephemeral : Cookie 또는 Ceche를 저장하지 않는 작업일 경우
+3. Background : 컨텐츠 등의 다운로드-업로드 할 때 사용
+
+URLSessionTask - 실제 서버통신 작업 방식 분류
+1. URLSesstionDataTask : 기본적 Data 통신 작업. Response data를  메모리에서 처리하도록 함. 단, Background 지원 안됨
+2. URLUploadTask / DownloadTask : request body 제공
