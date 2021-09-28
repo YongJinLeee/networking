@@ -60,4 +60,17 @@ DispatchQueue.global(qos: .background).async {
     }
 }
 
+// sync, Async
+DispatchQueue.global(qos: .background).async {
+    for i in 0...5 {
+        print ("😂 웃픔")
+    }
+}
 
+DispatchQueue.global(qos: .userInteractive).async {
+    for i in 0...5 {
+        print("🐈 고앵")
+    }
+}
+
+// -> 두번째 큐가 훨씬 더 먼저 나오는 경향을 보임
