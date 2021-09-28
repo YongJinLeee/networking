@@ -35,7 +35,7 @@ relativeURL?.baseURL
 var urlcomponents = URLComponents(string: "https://itunes.apple.com/search?")
 let mediaQuery = URLQueryItem(name: "media", value: "music")
 let entityQuery = URLQueryItem(name: "entity", value: "song")
-let termQuery = URLQueryItem(name: "term", value: "Gdragon")
+let termQuery = URLQueryItem(name: "term", value: "지드래곤")
 
 urlcomponents?.queryItems?.append(mediaQuery)
 urlcomponents?.queryItems?.append(entityQuery)
