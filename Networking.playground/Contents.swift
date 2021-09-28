@@ -38,3 +38,26 @@ DispatchQueue.global(qos: .background).async {
 }
 
 
+//Custom Queue - 실무 사용빈도는 낮음
+let concurrentQueue = DispatchQueue(label: "concurent", qos: .background, attributes: .concurrent)
+let serialQueue = DispatchQueue(label: "serial", qos: .userInteractive)
+
+// sync, Async 복합적인 상황
+// 예제코드 >>
+func downloadImageFromServer() -> UIImage {
+    //heavy task
+    return UIImage()
+}
+func updateUI(image: UIImage) {
+}
+
+DispatchQueue.global(qos: .background).async {
+    let image = downloadImageFromServer()
+    
+    DispatchQueue.main.async {
+        // update UI 이므로 메인스레드에서 일어나도록
+        updateUI(image: image)
+    }
+}
+
+
