@@ -1,5 +1,5 @@
 import UIKit
-
+import Foundation
 // URLSesstion
 
 // 1. URLSesstionConfiguration
@@ -35,17 +35,27 @@ let requestURL = urlcomponents.url!
 
 // data 받을 struct 구현
 
-struct Response {
-    
+struct Response: Codable {
     let resultCount: Int
     let tracks: [Track]
     
+    enum CodingKeys: String, CodingKey {
+        case tracks = "results"
+        case resultCount
+    }
 }
 
-struct Track {
+struct Track: Codable {
     let title: String
-    let artist: String
-    let thumbnailPath: String // 썸네일 이미지가 있는 곳에 가서 받아와야힉 때문에 주소로
+    let artistName: String
+    let thumbnailPath: String
+    // 썸네일 이미지가 있는 곳에 가서 받아와야하기 때문에 주소로 적음
+
+    enum CodingKeys: String, CodingKey {
+        case title = "trackName"
+        case artistName
+        case thumbnailPath = "artworkUrl30"
+    }
 }
 
 
@@ -70,6 +80,33 @@ let dataTask = session.dataTask(with: requestURL) { (data, response, error) in
     let resultString = String(data: resultData, encoding: .utf8)
     
     
+    // 받아온 데이터로 필요한 오브젝트로 구성
+    // 1. data -> Track 목록으로 가져오기 : [Track]
+    // 2. Track object 생성
+    // 3. response된 data 형태에서 struct로 파싱 -> Codable 사용
+    //  - Json 파일, 데이터 -> 오브젝트로 구성할 때 codable로 파싱
+    // 4. 검색 결과(results)로 들고 있는 내용들을 재구성
+    //  - Response ( [Track] ) 의 형태로 오브젝트
+
+    // 구체적 시행
+    // -> response와 Track의 Struct 생성
+    // -> struct의 프로퍼티 이름과 실제 데이터의 키 이름 맞추기 (for decoding)
+    // -> 파싱(Decoding)
+    // -> 트랙리스트 가져오기 완료
+
+    // - codable 파싱
+    // try do catch
+    do {
+        let decoder = JSONDecoder()
+        let response = try decoder.decode(Response.self, from: resultData)
+        
+        let tracks = response.tracks
+        
+        print("Track Count: \(tracks.count)개 ")
+    } catch let error { // 예외처리
+        print("error: \(error.localizedDescription)")
+    }
+
     print("----> result :  \(resultData)")
     print("----> statusCode : \(statusCode)")
 //    print("---> result String : \(resultString)")
@@ -77,18 +114,3 @@ let dataTask = session.dataTask(with: requestURL) { (data, response, error) in
 }
 
 dataTask.resume()
-
-// 받아온 데이터로 필요한 오브젝트로 구성
-// 1. data -> Track 목록으로 가져오기 : [Track]
-// 2. Track object 생성
-// 3. response된 data 형태에서 struct로 파싱 -> Codable 사용
-//  - Json 파일, 데이터 -> 오브젝트로 구성할 때 codable로 파싱
-// 4. 검색 결과(results)로 들고 있는 내용들을 재구성
-//  - Response ( [Track] ) 의 형태로 오브젝트
-
-// 구체적 시행
-// -> response와 Track의 Struct 생성
-// -> struct의 프로퍼티 이름과 실제 데이터의 키 이름 맞추기 (for decoding)
-// -> 파싱(Decoding)
-// -> 트랙리스트 가져오기 완료
-
