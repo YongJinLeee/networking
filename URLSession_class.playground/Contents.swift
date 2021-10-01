@@ -102,7 +102,7 @@ let dataTask = session.dataTask(with: requestURL) { (data, response, error) in
         
         let tracks = response.tracks
         
-        print("Track Count: \(tracks.count)개 ")
+        print("Track Count: \(tracks.count)개, \(tracks.first?.title), \(tracks.last?.thumbnailPath)")
     } catch let error { // 예외처리
         print("error: \(error.localizedDescription)")
     }
